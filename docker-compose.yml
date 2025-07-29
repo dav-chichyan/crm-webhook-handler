@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: maqoor_webhook_processor
+    environment:
+      WEBHOOK_TARGET_8081_URL: http://webhook-receiver-8081:8081/webhook/receiver
+      WEBHOOK_TARGET_8080_URL: http://host.docker.internal:8080/webhook/receiver
+      API_HOST: host.docker.internal
+      API_PORT: 8443
+      API_PROTOCOL: https
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    ports:
+      - "80:8085"
+      - "443:8443"
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+    networks:
+      - shared_webhook_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: maqoor_rabbitmq
+    ports:
+      - "5672:5672"      # AMQP port
+      - "15672:15672"    # Management UI port
+    networks:
+      - shared_webhook_network
+
+networks:
+  shared_webhook_network:
+    external: true
