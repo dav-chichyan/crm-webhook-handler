@@ -52,27 +52,10 @@ A service that receives webhooks from CRM systems via HTTPS, processes them thro
 
 ---
 
-## Configuration
-
-Sensitive settings (RabbitMQ credentials, HTTPS certificates, etc.) are stored in `application.properties`, which is **not tracked by git** for security.  
-See `application.properties.example` for required keys.
-
----
 
 ## Contributing
 
 Contributions and issues are welcome!  
 Feel free to open an issue or submit a pull request.
 
----
 
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-## Contact
-
-Created by [David Chichyan](https://github.com/Chicho-byte)  
-Questions? Open an issue or reach out via GitHub.
